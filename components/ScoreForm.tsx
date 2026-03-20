@@ -55,6 +55,7 @@ export default function ScoreForm({ onCreated }: ScoreFormProps) {
 
     const userId = userData.user.id;
 
+    // Ensure a profile row exists for the authenticated user.
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("id")

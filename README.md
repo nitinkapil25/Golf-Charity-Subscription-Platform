@@ -1,83 +1,56 @@
-# Golf Charity Subscription Platform
+﻿# Golf Charity Subscription Platform
 
-A full-stack web application where users can subscribe, enter their golf scores, participate in monthly draws, and support charities.
+A Next.js + Supabase app where users can subscribe, log golf scores, participate in monthly draws, and support charities.
 
----
+## Features
+- Authentication (Supabase email/password)
+- Score system (1-45, latest 5 retained)
+- Charity selection
+- Draw system with prize tiers
+- Admin panel (profiles, scores, draws, winners)
 
-## 🚀 Features
+## Tech Stack
+- Next.js 14 (App Router)
+- Supabase (Postgres + Auth)
+- Tailwind CSS
 
-* 🔐 Authentication (Signup/Login using Supabase)
-* ⛳ Score System
+## Routes
+- `/` Home
+- `/login` Login
+- `/signup` Signup
+- `/dashboard` User dashboard
+- `/admin` Admin panel (restricted by email)
 
-  * Users can enter golf scores (1–45)
-  * Only latest 5 scores are stored
-* ❤️ Charity Selection
-
-  * Users can select a charity to support
-* 🎯 Draw System
-
-  * Generates 5 random numbers
-  * Matches with user scores
-* 🏆 Prize Logic
-
-  * 5 match → Jackpot
-  * 4 match → Second tier
-  * 3 match → Third tier
-* 👨‍💻 Admin Panel
-
-  * View all users
-  * View scores
-  * View draws
-
----
-
-## 🛠 Tech Stack
-
-* Frontend: Next.js (App Router)
-* Backend: Supabase (Database + Auth)
-* Styling: Tailwind CSS
-* Deployment: Vercel
-
----
-
-## ⚙️ Setup Instructions
-
-1. Clone the repository:
-
-```bash
-git clone <your-repo-link>
-cd project
-```
-
-2. Install dependencies:
-
+## Setup
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Create `.env.local` file:
-
+2. Create `.env.local`:
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Optional (admin access)
+NEXT_PUBLIC_ADMIN_EMAIL=admin@example.com
 ```
 
-4. Run the project:
-
+3. Run the dev server:
 ```bash
 npm run dev
 ```
 
----
+## Database Notes
+- `scores.user_id` references `profiles.id`
+- Ensure `profiles` rows exist for users (RLS policy or trigger)
+- `draws.match_count` is required for winners reporting
 
+Recommended SQL for the draw match count column:
+```sql
+alter table public.draws
+add column if not exists match_count int;
+```
 
-## 🧠 How It Works
-
-Users subscribe to the platform, enter their golf scores, and participate in a draw system. Based on matching scores, they can win rewards while also contributing to charity.
-
----
-
-## 📌 Notes
-
-* Subscription system is simulated (no real payment integration)
-* Built as part of a full-stack development assignment
+## Submission Notes
+- Subscription flow is UI-only (no payments)
+- All data is managed through Supabase Auth and Postgres

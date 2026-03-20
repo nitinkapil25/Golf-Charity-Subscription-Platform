@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-const ADMIN_EMAIL = "nitinkapil4321@gmail.com";
+const ADMIN_EMAIL =
+  process.env.NEXT_PUBLIC_ADMIN_EMAIL ?? "admin@example.com";
 
 type ProfileRow = {
   id: string;

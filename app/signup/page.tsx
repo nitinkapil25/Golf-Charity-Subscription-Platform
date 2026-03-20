@@ -19,9 +19,18 @@ export default function SignupPage() {
     setMessage(null);
     setLoading(true);
 
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
+      setLoading(false);
+      setError("Email and password are required.");
+      return;
+    }
+
     const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
+      email: trimmedEmail,
+      password: trimmedPassword,
     });
 
     setLoading(false);

@@ -131,9 +131,9 @@ export default function Home() {
             <div className="mt-6 rounded-2xl bg-white/10 p-4 text-sm">
               <p className="font-semibold">Latest impact story</p>
               <p className="mt-2 text-white/80">
-                "With consistent monthly support, we expanded our night shelter
-                and kept families together through the winter." — City Haven
-                Collective
+                &ldquo;With consistent monthly support, we expanded our night
+                shelter and kept families together through the winter.&rdquo; —
+                City Haven Collective
               </p>
             </div>
           </div>

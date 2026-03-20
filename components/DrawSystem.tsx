@@ -69,6 +69,9 @@ export default function DrawSystem() {
 
       if (data) {
         setDraw(data as DrawRecord);
+        if (typeof (data as DrawRecord).match_count === "number") {
+          setMatches((data as DrawRecord).match_count ?? null);
+        }
       }
     };
 
@@ -103,6 +106,7 @@ export default function DrawSystem() {
     const userScores = (scoreData ?? []).map((row) => row.score);
     const matchCount = numbers.filter((num) => userScores.includes(num)).length;
 
+    // Store the draw with a computed match count for admin reporting.
     const { data: insertData, error: insertError } = await supabase
       .from("draws")
       .insert({

@@ -17,6 +17,10 @@ yarn-error.log*
 # System files
 .DS_Store
 
+# AI tool metadata
+AGENTS.md
+CLAUDE.md
+
 # Vercel
 .vercel
 
